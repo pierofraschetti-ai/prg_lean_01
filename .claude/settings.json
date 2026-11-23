@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(lake exe cache get *)",
+      "Bash(lake build *)",
+      "Bash(lake lean *)",
+      "Bash(lake env lean *)",
+      "Bash(lean --version)",
+      "Bash(lake --version)",
+      "Bash(elan show)"
+    ],
+    "ask": [
+      "Bash(lake update *)",
+      "Bash(lake clean *)",
+      "Edit(/lean-toolchain)",
+      "Edit(/lake-manifest.json)",
+      "Edit(/lakefile.toml)",
+      "Edit(/lakefile.lean)"
+    ],
+    "deny": [
+      "Edit(/.lake/**)"
+    ]
+  }
+}
