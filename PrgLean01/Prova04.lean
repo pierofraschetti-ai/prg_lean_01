@@ -7,7 +7,11 @@ set_option linter.style.header false
 
 If `p` is prime and `p` does not divide `a`, then `a ^ (p - 1) ≡ 1 (mod p)`.
 
-The hypotheses are necessary: for `a = p = 2` we would get `2 ≡ 1 (mod 2)`, which is false.
+Both hypotheses are necessary; each counterexample below violates exactly one of them:
+- `p` prime: for `p = 4` (not prime) and `a = 3` (not divisible by 4) we get
+  `3 ^ 3 = 27 ≡ 3 (mod 4)`, not `1`.
+- `p ∤ a`: for `p = 3` (prime) and `a = 6` (divisible by 3) we get
+  `6 ^ 2 = 36 ≡ 0 (mod 3)`, not `1`.
 
 ## Proof strategy
 
@@ -63,5 +67,12 @@ theorem fermat_little_mathlib {p a : ℕ} (hp : p.Prime) (ha : ¬ p ∣ a) :
 
 -- `3 ^ 6 = 729 = 104 * 7 + 1`.
 example : 3 ^ (7 - 1) ≡ 1 [MOD 7] := fermat_little Nat.prime_seven (by norm_num)
+
+-- The hypotheses cannot be dropped (see the module docstring).
+-- `p = 4` is not prime: `3 ^ 3 = 27 ≡ 3 [MOD 4]`.
+example : ¬ 3 ^ (4 - 1) ≡ 1 [MOD 4] := by decide
+
+-- `p = 3` divides `a = 6`: `6 ^ 2 = 36 ≡ 0 [MOD 3]`.
+example : ¬ 6 ^ (3 - 1) ≡ 1 [MOD 3] := by decide
 
 end Prova04
